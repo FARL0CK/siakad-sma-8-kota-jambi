@@ -80,3 +80,4 @@ Jangan ragu untuk memeriksa halaman masalah jika Anda ingin berkontribusi. **Ber
 
 - Copyright © 2020 Adhi Ariyadi.
 - **Sistem Informasi Akademik Sekolah is open-sourced software licensed under the MIT license.**
+"#siakad-sma-8-kota-jambi" 
