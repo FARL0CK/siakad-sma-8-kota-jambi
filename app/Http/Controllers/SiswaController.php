@@ -33,6 +33,18 @@ class SiswaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    /**
+     * Display the specified resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function biodata()
+    {
+        $siswa = Siswa::all();
+
+        return view('siswa.biodata', compact('siswa'));
+    }
     public function create()
     {
         // 
@@ -49,7 +61,10 @@ class SiswaController extends Controller
         $this->validate($request, [
             'no_induk' => 'required|string|unique:siswa',
             'nama_siswa' => 'required',
+            'tmp_lahir' => 'required',
+            'tgl_lahir' => 'required',
             'jk' => 'required',
+            'telp' => 'required',
             'kelas_id' => 'required'
         ]);
 
@@ -58,31 +73,47 @@ class SiswaController extends Controller
             $new_foto = date('s' . 'i' . 'H' . 'd' . 'm' . 'Y') . "_" . $foto->getClientOriginalName();
             Siswa::create([
                 'no_induk' => $request->no_induk,
-                'nis' => $request->nis,
+                'nisn' => $request->nisn,
                 'nama_siswa' => $request->nama_siswa,
-                'jk' => $request->jk,
-                'kelas_id' => $request->kelas_id,
-                'telp' => $request->telp,
                 'tmp_lahir' => $request->tmp_lahir,
                 'tgl_lahir' => $request->tgl_lahir,
+                'jk' => $request->jk,
+                'agama' => $request->agama,
+                'alamat' => $request->alamat,
+                'telp' => $request->telp,
+                'nama_ayah' => $request->nama_ayah,
+                'nama_ibu' => $request->nama_ibu,
+                'pekerjaan_ayah' => $request->pekerjaan_ayah,
+                'pekerjaan_ibu' => $request->pekerjaan_ibu,
+                'nama_wali' => $request->nama_wali,
+                'pekerjaan_wali' => $request->pekerjaan_wali,
+                'kelas_id' => $request->kelas_id,
                 'foto' => 'uploads/siswa/' . $new_foto
             ]);
             $foto->move('uploads/siswa/', $new_foto);
         } else {
             if ($request->jk == 'L') {
-                $foto = 'uploads/siswa/52471919042020_male.jpg';
+                $foto = 'uploads/siswa/male.png';
             } else {
-                $foto = 'uploads/siswa/50271431012020_female.jpg';
+                $foto = 'uploads/siswa/female.png';
             }
-            Guru::create([
+            Siswa::create([
                 'no_induk' => $request->no_induk,
-                'nis' => $request->nis,
+                'nisn' => $request->nisn,
                 'nama_siswa' => $request->nama_siswa,
-                'jk' => $request->jk,
-                'kelas_id' => $request->kelas_id,
-                'telp' => $request->telp,
                 'tmp_lahir' => $request->tmp_lahir,
                 'tgl_lahir' => $request->tgl_lahir,
+                'jk' => $request->jk,
+                'agama' => $request->agama,
+                'alamat' => $request->alamat,
+                'telp' => $request->telp,
+                'nama_ayah' => $request->nama_ayah,
+                'nama_ibu' => $request->nama_ibu,
+                'pekerjaan_ayah' => $request->pekerjaan_ayah,
+                'pekerjaan_ibu' => $request->pekerjaan_ibu,
+                'nama_wali' => $request->nama_wali,
+                'pekerjaan_wali' => $request->pekerjaan_wali,
+                'kelas_id' => $request->kelas_id,
                 'foto' => $foto
             ]);
         }
@@ -142,13 +173,20 @@ class SiswaController extends Controller
         } else {
         }
         $siswa_data = [
-            'nis' => $request->nis,
+            'nisn' => $request->nisn,
             'nama_siswa' => $request->nama_siswa,
-            'jk' => $request->jk,
-            'kelas_id' => $request->kelas_id,
-            'telp' => $request->telp,
             'tmp_lahir' => $request->tmp_lahir,
             'tgl_lahir' => $request->tgl_lahir,
+            'jk' => $request->jk,
+            'agama' => $request->agama,
+            'alamat' => $request->alamat,
+            'telp' => $request->telp,
+            'nama_ayah' => $request->nama_ayah,
+            'nama_ibu' => $request->nama_ibu,
+            'pekerjaan_ayah' => $request->pekerjaan_ayah,
+            'pekerjaan_ibu' => $request->pekerjaan_ibu,
+            'nama_wali' => $request->nama_wali,
+            'alamat_wali' => $request->alamat_wali
         ];
         $siswa->update($siswa_data);
 

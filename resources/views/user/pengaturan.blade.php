@@ -1,141 +1,193 @@
 @extends('template_backend.home')
-@section('heading', 'Profile')
+@section('heading')
 @section('page')
-  <li class="breadcrumb-item active">User Profile</li>
+<li class="breadcrumb-item active">User Biodata</li>
 @endsection
 @section('content')
 <div class="col-12">
-    <div class="row">
-        <div class="col-5">
-            <!-- Profile Image -->
-            <div class="card card-primary card-outline">
-                <div class="card-body box-profile">
-                    <div class="text-center">
-                    @if (Auth::user()->role == 'Guru')
-                        <a href="{{ asset(Auth::user()->guru(Auth::user()->id_card)->foto) }}" data-toggle="lightbox" data-title="Foto {{ Auth::user()->name }}" data-gallery="gallery" data-footer='<a href="{{ route('pengaturan.edit-foto') }}" id="linkFotoGuru" class="btn btn-link btn-block btn-light"><i class="nav-icon fas fa-file-upload"></i> &nbsp; Ubah Foto</a>'>
-                            <img src="{{ asset(Auth::user()->guru(Auth::user()->id_card)->foto) }}" width="130px" class="profile-user-img img-fluid img-circle" alt="User profile picture">
-                        </a>
-                    @elseif (Auth::user()->role == 'Siswa')
-                        <a href="{{ asset(Auth::user()->siswa(Auth::user()->no_induk)->foto) }}" data-toggle="lightbox" data-title="Foto {{ Auth::user()->name }}" data-gallery="gallery" data-footer='<a href="{{ route('pengaturan.edit-foto') }}" id="linkFotoGuru" class="btn btn-link btn-block btn-light"><i class="nav-icon fas fa-file-upload"></i> &nbsp; Ubah Foto</a>'>
-                            <img src="{{ asset(Auth::user()->siswa(Auth::user()->no_induk)->foto) }}" width="130px" class="profile-user-img img-fluid img-circle" alt="User profile picture">
-                        </a>
-                    @else
-                        <img class="profile-user-img img-fluid img-circle" src="{{ asset('img/male.jpg') }}" alt="User profile picture">
-                    @endif
-                    </div>
-                    <h3 class="profile-username text-center">{{ Auth::user()->name }}</h3>
-                    <p class="text-muted text-center">{{ Auth::user()->role }}</p>
-                    @if (Auth::user()->role == 'Guru')
-                        <ul class="list-group list-group-unbordered mb-3">
-                            <li class="list-group-item">
-                                <b>Id Card</b> <a class="float-right">{{ Auth::user()->id_card }}</a>
-                            </li>
-                            <li class="list-group-item">
-                                <b>NIP</b> <a class="float-right">{{ Auth::user()->guru(Auth::user()->id_card)->nip }}</a>
-                            </li>
-                        </ul>
-                    @elseif (Auth::user()->role == 'Siswa')
-                        <ul class="list-group list-group-unbordered mb-3">
-                            <li class="list-group-item">
-                                <b>No INduk</b> <a class="float-right">{{ Auth::user()->no_induk }}</a>
-                            </li>
-                            <li class="list-group-item">
-                                <b>NIS</b> <a class="float-right">{{ Auth::user()->siswa(Auth::user()->no_induk)->nis }}</a>
-                            </li>
-                        </ul>
-                    @else
-                    @endif
-                    <a href="{{ route('pengaturan.profile') }}" class="btn btn-primary btn-block"><b>Edit Profile</b></a>
-                </div>
-                <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
 
-            <div class="card card-primary card-outline">
-                <div class="card-header">
-                    <h3 class="card-title">Pengaturan Akun</h3>
+    <div class="col-md-12">
+        <!-- Profile Image -->
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3>Biodata</h3>
+            </div>
+            <div class="card-body box-profile">
+                <div class="text-center">
+                    @if (Auth::user()->role == 'Guru')
+                    <a href="{{ asset(Auth::user()->guru(Auth::user()->id_card)->foto) }}" data-toggle="lightbox"
+                        data-title="Foto {{ Auth::user()->name }}" data-gallery="gallery"
+                        data-footer='<a href="{{ route('pengaturan.edit-foto') }}" id="linkFotoGuru" class="btn btn-link btn-block btn-light"><i class="nav-icon fas fa-file-upload"></i> &nbsp; Ubah Foto</a>'>
+                        <img src="{{ asset(Auth::user()->guru(Auth::user()->id_card)->foto) }}" width="130px"
+                            class="profile-user-img img-fluid img-circle" alt="User profile picture">
+                    </a>
+                    @elseif (Auth::user()->role == 'Siswa')
+                    <a href="{{ asset(Auth::user()->siswa(Auth::user()->no_induk)->foto) }}" data-toggle="lightbox"
+                        data-title="Foto {{ Auth::user()->name }}" data-gallery="gallery"
+                        data-footer='<a href="{{ route('pengaturan.edit-foto') }}" id="linkFotoGuru" class="btn btn-link btn-block btn-light"><i class="nav-icon fas fa-file-upload"></i> &nbsp; Ubah Foto</a>'>
+                        <img src="{{ asset(Auth::user()->siswa(Auth::user()->no_induk)->foto) }}" width="130px"
+                            class="profile-user-img img-fluid img-circle" alt="User profile picture">
+                    </a>
+                    @else
+                    <img class="profile-user-img img-fluid img-circle" src="{{ asset('img/male.jpg') }}"
+                        alt="User profile picture">
+                    @endif
                 </div>
-                <div class="card-body">
-                    <table class="table" style="margin-top: -21px;">
+                <h3 class="profile-username text-center">{{ Auth::user()->name }}</h3>
+                <p class="text-muted text-center">{{ Auth::user()->role }}
+                </p>
+                @if (Auth::user()->role == 'Guru')
+                <table class="table table-bordered table-striped" style="width: 100%">
                     <tr>
-                        <td width="50"><i class="nav-icon fas fa-envelope"></i></td>
-                        <td>Ubah Email</td>
-                        <td width="50"><a href="{{ route('pengaturan.email') }}" class="btn btn-default btn-sm">Edit</a></td>
+                        <td> Email</td>
+                        <td>{{ Auth::user()->email }}</td>
                     </tr>
                     <tr>
-                        <td width="50"><i class="nav-icon fas fa-key"></i></td>
-                        <td>Ubah Password</td>
-                        <td width="50"><a href="{{ route('pengaturan.password') }}" class="btn btn-default btn-sm">Edit</a></td>
+                        <td>Guru Mapel</td>
+                        <td>{{ Auth::user()->guru(Auth::user()->id_card)->mapel->nama_mapel }}</td>
                     </tr>
-                    </table>
-                </div>
+                    <tr>
+                        <td> NIP</td>
+                        <td>{{ Auth::user()->guru(Auth::user()->id_card)->nip }}</td>
+                    </tr>
+                    <tr>
+                        <td>NIK</td>
+                        <td>{{ Auth::user()->guru(Auth::user()->id_card)->nik }}</td>
+                    </tr>
+                    <tr>
+                        <td>NUPTK</td>
+                        <td>{{ Auth::user()->guru(Auth::user()->id_card)->nuptk }}</td>
+                    </tr>
+                    <tr>
+                        <td>NRG</td>
+                        <td>{{ Auth::user()->guru(Auth::user()->id_card)->nrg }}</td>
+                    </tr>
+                    <tr>
+                        <td>NPWP</td>
+                        <td>{{ Auth::user()->guru(Auth::user()->id_card)->npwp }}</td>
+                    </tr>
+                    <tr>
+                        <td>KARPEG</td>
+                        <td>{{ Auth::user()->guru(Auth::user()->id_card)->karpeg }}</td>
+                    </tr>
+                    <tr>
+                        <td>Nama Jabatan</td>
+                        <td>{{ Auth::user()->guru(Auth::user()->id_card)->nama_jabatan }}</td>
+                    </tr>
+                    <tr>
+                        <td>Pendidikan</td>
+                        <td>{{ Auth::user()->guru(Auth::user()->id_card)->pendidikan }}</td>
+                    </tr>
+                    <tr>
+                        <td>Jenis Kelamin</td>
+                        <td>{{ Auth::user()->guru(Auth::user()->id_card)->jk }}</td>
+                    </tr>
+                    <tr>
+                        <td>Alamat</td>
+                        <td>{{ Auth::user()->guru(Auth::user()->id_card)->alamat }}</td>
+                    </tr>
+                    <tr>
+                        <td>No Telepon</td>
+                        <td>{{ Auth::user()->guru(Auth::user()->id_card)->telp }}</td>
+                    </tr>
+                    <tr>
+                        <td>Tahun Sertifikasi</td>
+                        <td>{{ Auth::user()->guru(Auth::user()->id_card)->thn_sertifikasi }}</td>
+                    </tr>
+                    <tr>
+                        <td>Tempat Lahir</td>
+                        <td>{{ Auth::user()->guru(Auth::user()->id_card)->tmp_lahir }}</td>
+                    </tr>
+                    <tr>
+                        <td>Tanggal Lahir</td>
+                        <td>{{ date('l, d F Y', strtotime(Auth::user()->guru(Auth::user()->id_card)->tgl_lahir)) }}</td>
+                    </tr>
+                </table>
+
+                @elseif (Auth::user()->role == 'Siswa')
+                <table class="table table-bordered table-striped" style="width: 100%">
+                    <tr>
+                        <td> Email</td>
+                        <td>{{ Auth::user()->email }}</td>
+                    </tr>
+                    <tr>
+                        <td>NIS</td>
+                        <td>{{ Auth::user()->no_induk }}</td>
+                    </tr>
+                    <tr>
+                        <td>Tempat Lahir</td>
+                        <td>{{ Auth::user()->siswa(Auth::user()->no_induk)->kelas->nama_kelas }}</td>
+                    </tr>
+                    <tr>
+                        <td>Tanggal Lahir</td>
+                        <td>{{ date('l, d F Y', strtotime(Auth::user()->siswa(Auth::user()->no_induk)->tgl_lahir)) }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Jenis Kelamin</td>
+                        <td>{{ Auth::user()->siswa(Auth::user()->no_induk)->jk }}</td>
+                    </tr>
+                    <tr>
+                        <td>Agama</td>
+                        <td>{{ Auth::user()->siswa(Auth::user()->no_induk)->agama }}</td>
+                    </tr>
+                    <tr>
+                        <td>Alamat</td>
+                        <td>{{ Auth::user()->siswa(Auth::user()->no_induk)->alamat }}</td>
+                    </tr>
+                    <tr>
+                        <td>No telepon</td>
+                        <td>{{ Auth::user()->siswa(Auth::user()->no_induk)->telp }}</td>
+                    </tr>
+                    <tr>
+                        <td>Nama Ayah</td>
+                        <td>{{ Auth::user()->siswa(Auth::user()->no_induk)->nama_ayah }}</td>
+                    </tr>
+                    <tr>
+                        <td>Nama Ibu</td>
+                        <td>{{ Auth::user()->siswa(Auth::user()->no_induk)->nama_ibu }}</td>
+                    </tr>
+                    <tr>
+                        <td>pekerjaan Ayah</td>
+                        <td>{{ Auth::user()->siswa(Auth::user()->no_induk)->pekerjaan_ayah }}</td>
+                    </tr>
+                    <tr>
+                        <td>Pekerjaan Ibu</td>
+                        <td>{{ Auth::user()->siswa(Auth::user()->no_induk)->pekerjaan_ibu }}</td>
+                    </tr>
+                    <tr>
+                        <td>Nama Wali</td>
+                        <td>{{ Auth::user()->siswa(Auth::user()->no_induk)->nama_wali }}</td>
+                    </tr>
+                    <tr>
+                        <td>Pekerjaan Wali</td>
+                        <td>{{ Auth::user()->siswa(Auth::user()->no_induk)->pekerjaan_wali }}</td>
+                    </tr>
+
+                </table>
+
+
+
+
+
+
+                @else
+                @endif
+
+
+            </div>
+
+
+
+
+
+            <div class="card-footer" style="background: rgb(255, 251, 26)">
+                <i class="fas fa-exclamation-circle"> CATATAN : Jika ada
+                    kesalahan data, serahkan data
+                    perbaikan tersebut
+                    kepada admin atau operator sekolah</i>
             </div>
         </div>
-        <!-- /.col -->
-        
-        <div class="col-7">
-            <!-- About Me Box -->
-            <div class="card card-primary">
-                <div class="card-header">
-                    <h3 class="card-title">About Me</h3>
-                </div>
-                <!-- /.card-header -->
-                <div class="card-body">
-                    <strong><i class="far fa-envelope mr-1"></i> Email</strong>
-                    <p class="text-muted">{{ Auth::user()->email }}</p>
-                    <hr>
-
-                    @if (Auth::user()->role == 'Guru')
-                        <strong><i class="fas fa-book mr-1"></i> Guru Mapel</strong>
-                        <p class="text-muted">{{ Auth::user()->guru(Auth::user()->id_card)->mapel->nama_mapel }}</p>
-                        <hr>
-                        <strong><i class="far fa-file-alt mr-1"></i> Kode Jadwal</strong>
-                        <p class="text-muted">{{ Auth::user()->guru(Auth::user()->id_card)->kode }}</p>
-                        <hr>
-                    @elseif (Auth::user()->role == 'Siswa')
-                        <strong><i class="fas fa-home mr-1"></i> Tempat Lahir</strong>
-                        <p class="text-muted">{{ Auth::user()->siswa(Auth::user()->no_induk)->kelas->nama_kelas }}</p>
-                        <hr>
-                    @else
-                    @endif
-
-                    @if (Auth::user()->role == 'Guru')
-                        <strong><i class="fas fa-map-marker-alt mr-1"></i> Tempat Lahir</strong>
-                        <p class="text-muted">{{ Auth::user()->guru(Auth::user()->id_card)->tmp_lahir }}</p>
-                        <hr>
-                    @elseif (Auth::user()->role == 'Siswa')
-                        <strong><i class="fas fa-map-marker-alt mr-1"></i> Tempat Lahir</strong>
-                        <p class="text-muted">{{ Auth::user()->siswa(Auth::user()->no_induk)->tmp_lahir }}</p>
-                        <hr>
-                    @else
-                    @endif
-
-                    @if (Auth::user()->role == 'Guru')
-                        <strong><i class="far fa-calendar mr-1"></i> Tanggal Lahir</strong>
-                        <p class="text-muted">{{ date('l, d F Y', strtotime(Auth::user()->guru(Auth::user()->id_card)->tgl_lahir)) }}</p>
-                        <hr>
-                    @elseif (Auth::user()->role == 'Siswa')
-                        <strong><i class="far fa-calendar mr-1"></i> Tanggal Lahir</strong>
-                        <p class="text-muted">{{ date('l, d F Y', strtotime(Auth::user()->siswa(Auth::user()->no_induk)->tgl_lahir)) }}</p>
-                        <hr>
-                    @else
-                    @endif
-
-                    @if (Auth::user()->role == 'Guru')
-                        <strong><i class="fas fa-phone mr-1"></i> No Telepon</strong>
-                        <p class="text-muted">{{ Auth::user()->guru(Auth::user()->id_card)->telp }}</p>
-                    @elseif (Auth::user()->role == 'Siswa')
-                        <strong><i class="fas fa-phone mr-1"></i> No Telepon</strong>
-                        <p class="text-muted">{{ Auth::user()->siswa(Auth::user()->no_induk)->telp }}</p>
-                    @else
-                    @endif
-                </div>
-                <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-        </div>
-        <!-- /.col -->
     </div>
-    <!-- /.row -->
 </div>
 @endsection

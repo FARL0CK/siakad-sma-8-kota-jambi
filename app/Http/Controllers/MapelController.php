@@ -19,7 +19,7 @@ class MapelController extends Controller
      */
     public function index()
     {
-        $mapel = Mapel::OrderBy('kelompok', 'asc')->OrderBy('nama_mapel', 'asc')->get();
+        $mapel = Mapel::OrderBy('nama_mapel', 'asc')->get();
         $paket = Paket::all();
         return view('admin.mapel.index', compact('mapel', 'paket'));
     }
@@ -44,8 +44,7 @@ class MapelController extends Controller
     {
         $this->validate($request, [
             'nama_mapel' => 'required',
-            'paket_id' => 'required',
-            'kelompok' => 'required'
+            'paket_id' => 'required'
         ]);
 
         Mapel::updateOrCreate(
@@ -55,7 +54,6 @@ class MapelController extends Controller
             [
                 'nama_mapel' => $request->nama_mapel,
                 'paket_id' => $request->paket_id,
-                'kelompok' => $request->kelompok,
             ]
         );
 

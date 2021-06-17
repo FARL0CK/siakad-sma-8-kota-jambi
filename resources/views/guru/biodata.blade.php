@@ -1,32 +1,35 @@
 @extends('template_backend.home')
-@section('heading', 'Details Guru')
+@section('heading', 'Biodata Guru')
 @section('page')
 <li class="breadcrumb-item active"><a href="{{ route('guru.index') }}">Guru</a></li>
-<li class="breadcrumb-item active">Details Guru</li>
+<li class="breadcrumb-item active">Biodata Guru</li>
 @endsection
 @section('content')
 <style>
     .size {
         font-size: 18px;
     }
+
+    td {
+        font-size: 20px;
+    }
 </style>
 <div class="col-md-12">
+    @foreach($guru as $biodata => $guru)
     <div class="card">
         <div class="card-header">
-            <a href="{{ route("guru.mapel", Crypt::encrypt($guru->mapel_id)) }}" class="btn btn-default btn-sm"><i
-                    class='nav-icon fas fa-arrow-left'></i> &nbsp; Kembali</a>
         </div>
+
         <div class="card-body">
             <div class="row no-gutters ml-2 mb-2 mr-2">
                 <div class="col-md-4">
-                    <img src="{{ asset($guru->foto) }}" class="card-img img-details" alt="default">
+                    <img src="{{ asset($guru->foto) }}" class="card-img img-details" alt="...">
                 </div>
                 <div class="col-md"></div>
                 <div class="col-md-7">
-                    <h3>Data Guru</h3>
                     <table class="table table-bordered table-striped" style="width: 100%">
                         <tr>
-                            <td class="a">Id Card</td>
+                            <td>Id Card</td>
                             <td>{{ $guru->id_card }}</td>
                         </tr>
                         <tr>
@@ -68,9 +71,9 @@
                         <tr>
                             <td>Jenis Kelamin</td>
                             <td>@if ($guru->jk == 'L')
-                                <h5 class="card-title card-text mb-2" style="font-size: 20px">Laki-laki</h5>
+                                <h5 class="card-title card-text mb-2">Laki-laki</h5>
                                 @else
-                                <h5 class="card-title card-text mb-2" style="font-size: 20px">Perempuan</h5>
+                                <h5 class="card-title card-text mb-2">Perempuan</h5>
                                 @endif</td>
                         </tr>
                         <tr>
@@ -79,7 +82,7 @@
                         </tr>
                         <tr>
                             <td>Tanggal Lahir</td>
-                            <td>{{ date('l, d F Y', strtotime($guru->tgl_lahir)) }}</td>
+                            <td>{{ $guru->tgl_lahir }}</td>
                         </tr>
                         <tr>
                             <td>Pendidikan</td>
@@ -101,9 +104,18 @@
 
 
                 </div>
+
             </div>
         </div>
+
+        <div class="card-footer" style="background: rgb(255, 251, 26)">
+            <i class="fas fa-exclamation-circle"> CATATAN : Jika ada
+                kesalahan data, serahkan data
+                perbaikan tersebut
+                kepada admin atau operator sekolah</i>
+        </div>
     </div>
+    @endforeach
 </div>
 @endsection
 @section('script')

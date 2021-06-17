@@ -1,14 +1,17 @@
 <footer class="main-footer">
-        <marquee>
-            <strong>Copyright &copy; <script>document.write(new Date().getFullYear());</script> &diams; <a href="http://smkn1jenpo.sch.id/">SMK Negeri 1 Jenangan Ponorogo</a>. </strong>
-        </marquee>
-    </footer>
+    <marquee style="font-family: cursive,sans">
+        <strong style="color: rgb(0, 0, 0)">Programer <script>
+            </script><i class="fa fa-user-secret"></i> <a href="https://www.instagram.com/wahyuhidayat01/"
+                style="color: rgb(0, 0, 0)">FARL0CK</a>
+        </strong>
+    </marquee>
+</footer>
 
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-        <!-- Control sidebar content goes here -->
-    </aside>
-    <!-- /.control-sidebar -->
+<!-- Control Sidebar -->
+<aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+</aside>
+<!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
 
@@ -203,32 +206,33 @@
 @yield('script')
 
 @if (count($errors)>0)
-    @foreach ($errors->all() as $error)
-        <script>
-            toastr.error("{{ $error }}");
-        </script>
-    @endforeach
+@foreach ($errors->all() as $error)
+<script>
+    toastr.error("{{ $error }}");
+</script>
+@endforeach
 @endif
 @if (Session::has('success'))
-    <script>
-        toastr.success("{{ Session('success') }}");
-    </script>
+<script>
+    toastr.success("{{ Session('success') }}");
+</script>
 @endif
 @if (Session::has('warning'))
-    <script>
-        toastr.warning("{{ Session('warning') }}");
-    </script>
+<script>
+    toastr.warning("{{ Session('warning') }}");
+</script>
 @endif
 @if (Session::has('info'))
-    <script>
-        toastr.info("{{ Session('info') }}");
-    </script>
+<script>
+    toastr.info("{{ Session('info') }}");
+</script>
 @endif
 @if (Session::has('error'))
-    <script>
-        toastr.error("{{ Session('error') }}");
-    </script>
+<script>
+    toastr.error("{{ Session('error') }}");
+</script>
 @endif
 
 </body>
+
 </html>

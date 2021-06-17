@@ -58,7 +58,7 @@ class UlanganController extends Controller
                 $deskripsi = Nilai::where('guru_id', $request->guru_id)->first();
                 $isi = Nilai::where('guru_id', $request->guru_id)->count();
                 if ($isi >= 1) {
-                    if ($nilai > 90) {
+                    if ($nilai > 89) {
                         Rapot::create([
                             'siswa_id' => $request->siswa_id,
                             'kelas_id' => $request->kelas_id,
@@ -68,7 +68,7 @@ class UlanganController extends Controller
                             'p_predikat' => 'A',
                             'p_deskripsi' => $deskripsi->deskripsi_a,
                         ]);
-                    } else if ($nilai > 80) {
+                    } else if ($nilai > 74) {
                         Rapot::create([
                             'siswa_id' => $request->siswa_id,
                             'kelas_id' => $request->kelas_id,
@@ -78,7 +78,7 @@ class UlanganController extends Controller
                             'p_predikat' => 'B',
                             'p_deskripsi' => $deskripsi->deskripsi_b,
                         ]);
-                    } else if ($nilai > 70) {
+                    } else if ($nilai > 69) {
                         Rapot::create([
                             'siswa_id' => $request->siswa_id,
                             'kelas_id' => $request->kelas_id,

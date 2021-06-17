@@ -9,7 +9,27 @@ class Guru extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['id_card', 'nip', 'nama_guru', 'mapel_id', 'kode', 'jk', 'telp', 'tmp_lahir', 'tgl_lahir', 'foto'];
+    protected $fillable = [
+        'id_card',
+        'nip',
+        'nama_guru',
+        'mapel_id',
+        'kode',
+        'jk',
+        'telp',
+        'tmp_lahir',
+        'tgl_lahir',
+        'foto',
+        'nik',
+        'nuptk',
+        'nrg',
+        'npwp',
+        'karpeg',
+        'nama_jabatan',
+        'pendidikan',
+        'alamat',
+        'thn_sertifikasi'
+    ];
 
     public function mapel()
     {

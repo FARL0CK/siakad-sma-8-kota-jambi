@@ -139,17 +139,17 @@ class RapotController extends Controller
     public function predikat(Request $request)
     {
         $nilai = Nilai::where('guru_id', $request->id)->first();
-        if ($request->nilai > 90) {
+        if ($request->nilai > 89) {
             $newForm[] = array(
                 'predikat' => 'A',
                 'deskripsi' => $nilai->deskripsi_a,
             );
-        } else if ($request->nilai > 80) {
+        } else if ($request->nilai > 72) {
             $newForm[] = array(
                 'predikat' => 'B',
                 'deskripsi' => $nilai->deskripsi_b,
             );
-        } else if ($request->nilai > 60) {
+        } else if ($request->nilai  > 59) {
             $newForm[] = array(
                 'predikat' => 'C',
                 'deskripsi' => $nilai->deskripsi_c,

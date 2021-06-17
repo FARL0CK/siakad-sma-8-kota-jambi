@@ -32,6 +32,17 @@ class GuruController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function tampil()
+    {
+        $guru = Guru::latest()->paginate(1);
+        return view('guru.biodata', compact('guru'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
+    }
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -53,8 +64,15 @@ class GuruController extends Controller
             'id_card' => 'required',
             'nama_guru' => 'required',
             'mapel_id' => 'required',
-            'kode' => 'required|string|unique:guru|min:2|max:3',
-            'jk' => 'required'
+            'kode' => 'required|string|unique:guru|min:2|max:10',
+            'nip' => 'required',
+            'nik' => 'required',
+            'nuptk' => 'required',
+            'nrg' => 'required',
+            'npwp' => 'required',
+            'karpeg' => 'required',
+            'jk' => 'required',
+            'thn_sertifikasi' => 'required',
         ]);
 
         if ($request->foto) {
@@ -70,14 +88,23 @@ class GuruController extends Controller
                 'telp' => $request->telp,
                 'tmp_lahir' => $request->tmp_lahir,
                 'tgl_lahir' => $request->tgl_lahir,
-                'foto' => 'uploads/guru/' . $new_foto
+                'foto' => 'uploads/guru/' . $new_foto,
+                'nik' => $request->nik,
+                'nuptk' => $request->nuptk,
+                'nrg' => $request->nrg,
+                'npwp' => $request->npwp,
+                'karpeg' => $request->karpeg,
+                'nama_jabatan' => $request->nama_jabatan,
+                'pendidikan' => $request->pendidikan,
+                'alamat' => $request->alamat,
+                'thn_sertifikasi' => $request->thn_sertifikasi
             ]);
             $foto->move('uploads/guru/', $new_foto);
         } else {
             if ($request->jk == 'L') {
-                $foto = 'uploads/guru/35251431012020_male.jpg';
+                $foto = 'uploads/guru/male.png';
             } else {
-                $foto = 'uploads/guru/23171022042020_female.jpg';
+                $foto = 'uploads/guru/female.png';
             }
             Guru::create([
                 'id_card' => $request->id_card,
@@ -89,7 +116,16 @@ class GuruController extends Controller
                 'telp' => $request->telp,
                 'tmp_lahir' => $request->tmp_lahir,
                 'tgl_lahir' => $request->tgl_lahir,
-                'foto' => $foto
+                'foto' => $foto,
+                'nik' => $request->nik,
+                'nuptk' => $request->nuptk,
+                'nrg' => $request->nrg,
+                'npwp' => $request->npwp,
+                'karpeg' => $request->karpeg,
+                'nama_jabatan' => $request->nama_jabatan,
+                'pendidikan' => $request->pendidikan,
+                'alamat' => $request->alamat,
+                'thn_sertifikasi' => $request->thn_sertifikasi
             ]);
         }
 
@@ -133,9 +169,17 @@ class GuruController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
+            'id_card' => 'required',
             'nama_guru' => 'required',
             'mapel_id' => 'required',
+            'nip' => 'required',
+            'nik' => 'required',
+            'nuptk' => 'required',
+            'nrg' => 'required',
+            'npwp' => 'required',
+            'karpeg' => 'required',
             'jk' => 'required',
+            'thn_sertifikasi' => 'required'
         ]);
 
         $guru = Guru::findorfail($id);
@@ -153,7 +197,17 @@ class GuruController extends Controller
             'jk' => $request->jk,
             'telp' => $request->telp,
             'tmp_lahir' => $request->tmp_lahir,
-            'tgl_lahir' => $request->tgl_lahir
+            'tgl_lahir' => $request->tgl_lahir,
+            'nik' => $request->nik,
+            'nuptk' => $request->nuptk,
+            'nrg' => $request->nrg,
+            'npwp' => $request->npwp,
+            'karpeg' => $request->karpeg,
+            'nama_jabatan' => $request->nama_jabatan,
+            'pendidikan' => $request->pendidikan,
+            'alamat' => $request->alamat,
+            'thn_sertifikasi' => $request->thn_sertifikasi
+
         ];
         $guru->update($guru_data);
 

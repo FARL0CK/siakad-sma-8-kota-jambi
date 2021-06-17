@@ -48,10 +48,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/ulangan/siswa', 'UlanganController@siswa')->name('ulangan.siswa');
     Route::get('/sikap/siswa', 'SikapController@siswa')->name('sikap.siswa');
     Route::get('/rapot/siswa', 'RapotController@siswa')->name('rapot.siswa');
+    Route::get('/biodata/siswa', 'SiswaController@biodata')->name('biodata.siswa');
   });
 
   Route::middleware(['guru'])->group(function () {
     Route::get('/absen/harian', 'GuruController@absen')->name('absen.harian');
+    Route::get('/biodata/guru', 'GuruController@tampil')->name('biodata.guru');
     Route::post('/absen/simpan', 'GuruController@simpan')->name('absen.simpan');
     Route::get('/jadwal/guru', 'JadwalController@guru')->name('jadwal.guru');
     Route::resource('/nilai', 'NilaiController');

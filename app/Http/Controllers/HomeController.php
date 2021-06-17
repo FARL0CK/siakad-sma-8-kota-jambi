@@ -51,14 +51,9 @@ class HomeController extends Controller
         $siswalk = Siswa::where('jk', 'L')->count();
         $siswapr = Siswa::where('jk', 'P')->count();
         $kelas = Kelas::count();
-        $bkp = Kelas::where('paket_id', '1')->count();
-        $dpib = Kelas::where('paket_id', '2')->count();
-        $ei = Kelas::where('paket_id', '3')->count();
-        $oi = Kelas::where('paket_id', '4')->count();
-        $tbsm = Kelas::where('paket_id', '6')->count();
-        $rpl = Kelas::where('paket_id', '7')->count();
-        $tpm = Kelas::where('paket_id', '5')->count();
-        $las = Kelas::where('paket_id', '8')->count();
+        $x = Kelas::where('paket_id', '1')->count();
+        $xi = Kelas::where('paket_id', '2')->count();
+        $xii = Kelas::where('paket_id', '3')->count();
         $mapel = Mapel::count();
         $user = User::count();
         $paket = Paket::all();
@@ -71,14 +66,9 @@ class HomeController extends Controller
             'siswapr',
             'siswa',
             'kelas',
-            'bkp',
-            'dpib',
-            'ei',
-            'oi',
-            'tbsm',
-            'rpl',
-            'tpm',
-            'las',
+            'x',
+            'xi',
+            'xii',
             'mapel',
             'user',
             'paket'
